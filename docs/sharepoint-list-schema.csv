@@ -1,0 +1,7 @@
+DisplayName,InternalName,Type,Required,Notes
+Title,Title,Single line of text,Yes,Customer name (used in flow)
+OnboardingStatus,OnboardingStatus,Choice,Yes,"New Signup; In Progress; Escalations; Completed"
+TimetoValueDays,TimetoValueDays,Number,No,Whole number
+Revenue,Revenue,Number,No,Currency or number
+Churned,Churned,Choice/YesNo,No,"Yes, No"
+SignupDate,SignupDate,DateTime,No,Date only (ISO preferred)
