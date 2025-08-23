@@ -1,0 +1,51 @@
+name: Customer Handoff – New Signup
+trigger:
+  type: SharePoint.WhenItemIsCreated
+  list: OnboardingTable
+  site: Steward All (company SharePoint site)
+
+logic:
+  type: Switch
+  expression: "@{triggerOutputs()?['body/OnboardingStatus']}"
+  cases:
+    - equals: "New Signup"
+      actions:
+        - type: Planner.CreateTask
+          group: "Automation Demo"
+          plan: "Onboarding Plan"
+          title: "New customer: @{triggerOutputs()?['body/Title']}"
+          bucket: "New Signup"
+    - equals: "In Progress"
+      actions:
+        - type: Planner.CreateTask
+          group: "Automation Demo"
+          plan: "Onboarding Plan"
+          title: "New customer: @{triggerOutputs()?['body/Title']}"
+          bucket: "In Progress"
+    - equals: "Escalations"
+      actions:
+        - type: Planner.CreateTask
+          group: "Automation Demo"
+          plan: "Onboarding Plan"
+          title: "New customer: @{triggerOutputs()?['body/Title']}"
+          bucket: "Escalations"
+    - equals: "Completed"
+      actions:
+        - type: Planner.CreateTask
+          group: "Automation Demo"
+          plan: "Onboarding Plan"
+          title: "New customer: @{triggerOutputs()?['body/Title']}"
+          bucket: "Completed"
+
+post_actions:
+  # optional, use whichever you enabled
+  - type: Teams.PostMessage
+    channel: "Automation Demo / General"
+    message: >
+      New onboarding task created for **@{triggerOutputs()?['body/Title']}**
+      in **@{triggerOutputs()?['body/OnboardingStatus']}**.
+      Revenue: $@{triggerOutputs()?['body/Revenue']}, TTV: @{triggerOutputs()?['body/TimetoValueDays']} days.
+
+notes:
+  - SharePoint column "Title" is used as Customer name.
+  - If you renamed columns, update expressions accordingly.
