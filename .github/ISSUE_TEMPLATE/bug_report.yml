@@ -1,0 +1,29 @@
+name: 🐞 Bug report
+description: Report a problem with the automation
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug clearly, including expected vs actual behavior.
+      placeholder: "It failed when..."
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: How do we reproduce the bug?
+      placeholder: "1. Go to..., 2. Click..., 3. See error"
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: Add environment info (tenant, flow version/date, etc.)
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots or logs
+      description: If applicable, add screenshots or output.
